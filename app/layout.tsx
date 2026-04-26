@@ -21,10 +21,10 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: {
-    default: "Studio",
-    template: "%s | Studio",
+    default: "WDA — Стратегический доступ к рынкам Китая и Центральной Азии",
+    template: "%s | WDA",
   },
-  description: "A digital studio building fast, scalable websites for ambitious brands.",
+  description: "Помогаем брендам выстраивать медийную инфраструктуру и усиливать присутствие в Китае и Центральной Азии.",
 };
 
 export default function RootLayout({
