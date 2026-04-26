@@ -3,7 +3,7 @@ import Nav from "@/components/Nav";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact — Studio",
+  title: "Contact — WDA",
   description: "Tell us what you're building. We'll get back to you within one business day.",
 };
 
