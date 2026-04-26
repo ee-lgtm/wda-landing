@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd /c/Users/evgen/supersite && npm install @tailwindcss/typography 2>&1)",
+      "mcp__ide__getDiagnostics",
+      "Bash(cmd /c \"taskkill /PID 56408 /F 2>&1\")",
+      "Bash(powershell -Command \"Stop-Process -Id 56408 -Force -ErrorAction SilentlyContinue; Get-NetTCPConnection -LocalPort 3000 -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }\")",
+      "Bash(powershell -Command \"Stop-Process -Id 56408 -Force -ErrorAction SilentlyContinue\")",
+      "Bash(powershell -Command \"Remove-Item 'C:\\\\Users\\\\evgen\\\\supersite\\\\.next\\\\dev\\\\lock' -Force -ErrorAction SilentlyContinue; Write-Host 'done'\")",
+      "Bash(cd /c/Users/evgen/supersite && npm run dev)",
+      "mcp__plugin_figma_figma__get_metadata",
+      "mcp__plugin_figma_figma__get_design_context",
+      "Bash(node:*)",
+      "Bash(python3:*)",
+      "mcp__plugin_figma_figma__get_screenshot",
+      "Bash(curl:*)",
+      "Bash(npx tsc:*)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(npm run:*)",
+      "Bash(taskkill /F /PID 35800)"
+    ]
+  }
+}

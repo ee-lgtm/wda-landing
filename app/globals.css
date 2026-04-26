@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px; /* sticky header 88px + 8px buffer */
+}
+
+body {
+  background: #ffffff;
+  color: #171717;
+}
