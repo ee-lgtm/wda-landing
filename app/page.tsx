@@ -11,7 +11,7 @@ import Section07 from "@/components/Section07";
 import Section09 from "@/components/Section09";
 
 export const metadata: Metadata = {
-  title: "Studio — Стратегический доступ к рынкам Китая и Центральной Азии",
+  title: "WDA — Стратегический доступ к рынкам Китая и Центральной Азии",
   description:
     "Помогаем брендам выстраивать медийную инфраструктуру и усиливать присутствие в регионе — от выхода на рынок до масштабирования действующих кампаний.",
 };
