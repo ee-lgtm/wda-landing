@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { reachGoal } from "@/lib/metrika";
 
 // ─── Section 09: Запросить консультацию ───────────────────────────────────────
 //
@@ -114,6 +115,7 @@ export default function Section09({
 
       if (!res.ok) throw new Error("server");
       setSuccess(true);
+      reachGoal("lead_form");
       form.reset();
     } catch {
       setError("Не удалось отправить заявку. Попробуйте позже.");
