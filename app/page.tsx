@@ -9,6 +9,7 @@ import Section05 from "@/components/Section05";
 import Section06 from "@/components/Section06";
 import Section07 from "@/components/Section07";
 import Section09 from "@/components/Section09";
+import SiteFooter from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "WDA — Стратегический доступ к рынкам Китая и Центральной Азии",
@@ -81,14 +82,7 @@ export default function HomePage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-zinc-100 bg-white">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 lg:px-8 text-xs text-zinc-400">
-          <span>© {new Date().getFullYear()} Studio</span>
-          <a href="/blog" className="transition-colors hover:text-zinc-600">
-            Публикации
-          </a>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   );
 }

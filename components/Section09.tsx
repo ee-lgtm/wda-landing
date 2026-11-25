@@ -89,7 +89,15 @@ export default function Section09({
     setError(null);
 
     const form = e.currentTarget;
+    const consent = (form.elements.namedItem("consent") as HTMLInputElement).checked;
+    if (!consent) {
+      setError("Необходимо дать согласие на обработку персональных данных.");
+      setLoading(false);
+      return;
+    }
+
     const data = {
+      consent,
       company: (form.elements.namedItem("company") as HTMLInputElement).value,
       name: (form.elements.namedItem("name") as HTMLInputElement).value,
       position: (form.elements.namedItem("position") as HTMLInputElement).value,
@@ -210,6 +218,9 @@ export default function Section09({
               <span className="relative mt-[2px] flex shrink-0 items-center justify-center">
                 <input
                   type="checkbox"
+                  name="consent"
+                  required
+                  onChange={() => setError(null)}
                   className="peer h-[16px] w-[16px] cursor-pointer appearance-none border border-[#afb3b0] bg-white transition-colors checked:border-[#c00000] checked:bg-[#c00000]"
                 />
                 {/* Checkmark — shown when checked */}
@@ -231,7 +242,24 @@ export default function Section09({
                 </svg>
               </span>
               <span className="text-[12px] leading-[1.65] text-[#5c605d]">
-                Я ознакомлен(а) и принимаю условия политики обработки персональных данных
+                Я даю{" "}
+                <a
+                  href="/consent"
+                  target="_blank"
+                  rel="noopener"
+                  className="text-[#2f3331] underline underline-offset-2 hover:text-[#c00000]"
+                >
+                  согласие на обработку персональных данных
+                </a>{" "}
+                и ознакомлен(а) с{" "}
+                <a
+                  href="/privacy"
+                  target="_blank"
+                  rel="noopener"
+                  className="text-[#2f3331] underline underline-offset-2 hover:text-[#c00000]"
+                >
+                  Политикой обработки персональных данных
+                </a>
               </span>
             </label>
 

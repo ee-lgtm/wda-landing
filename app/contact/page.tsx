@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import ContactForm from "./ContactForm";
+import SiteFooter from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "Contact — WDA",
@@ -49,14 +50,7 @@ export default function ContactPage() {
         </section>
       </main>
 
-      <footer className="border-t border-zinc-100">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6 text-xs text-zinc-400">
-          <span>© {new Date().getFullYear()} Studio</span>
-          <a href="/blog" className="hover:text-zinc-600">
-            Blog
-          </a>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   );
 }

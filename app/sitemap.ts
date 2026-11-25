@@ -1,17 +1,18 @@
 import type { MetadataRoute } from "next";
-import { getAllPosts } from "@/lib/blog";
+// Блог временно скрыт — вернуть вместе с блоком ниже
+// import { getAllPosts } from "@/lib/blog";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://yourdomain.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const posts = getAllPosts();
-
-  const blogUrls: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${BASE_URL}/blog/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }));
+  // const posts = getAllPosts();
+  //
+  // const blogUrls: MetadataRoute.Sitemap = posts.map((post) => ({
+  //   url: `${BASE_URL}/blog/${post.slug}`,
+  //   lastModified: new Date(post.date),
+  //   changeFrequency: "monthly",
+  //   priority: 0.7,
+  // }));
 
   return [
     {
@@ -21,12 +22,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${BASE_URL}/blog`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
+      url: `${BASE_URL}/privacy`,
+      changeFrequency: "yearly",
+      priority: 0.2,
     },
-    ...blogUrls,
+    {
+      url: `${BASE_URL}/consent`,
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
+    // Блог временно скрыт
+    // {
+    //   url: `${BASE_URL}/blog`,
+    //   lastModified: new Date(),
+    //   changeFrequency: "weekly",
+    //   priority: 0.8,
+    // },
+    // ...blogUrls,
     // /proposal/* routes are intentionally excluded
   ];
 }

@@ -8,9 +8,11 @@ export default function Nav() {
           Studio
         </Link>
         <nav className="flex items-center gap-6 text-sm text-zinc-500">
+          {/* Блог временно скрыт
           <Link href="/blog" className="transition-colors hover:text-zinc-900">
             Blog
           </Link>
+          */}
           <Link
             href="/contact"
             className="rounded-full bg-zinc-900 px-4 py-1.5 text-xs font-medium text-white transition-colors hover:bg-zinc-700"

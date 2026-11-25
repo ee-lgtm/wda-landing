@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const { company, name, position, contact, message } = await req.json();
+  const { company, name, position, contact, message, consent } = await req.json();
+
+  if (consent !== true) {
+    return NextResponse.json(
+      { error: "Consent to personal data processing is required" },
+      { status: 400 }
+    );
+  }
 
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
@@ -21,6 +28,8 @@ export async function POST(req: NextRequest) {
     `Должность: ${position || "—"}`,
     `Контакт: ${contact || "—"}`,
     `Запрос: ${message || "—"}`,
+    "",
+    `Согласие на обработку ПДн: да (${new Date().toISOString()})`,
   ].join("\n");
 
   const res = await fetch(
