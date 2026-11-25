@@ -41,17 +41,36 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* CTA */}
-        <a
-          href="#contact"
-          data-goal="cta_header"
-          className="hidden sm:inline-flex items-center justify-center h-9 px-6
-                     bg-[#c00000] text-[#fff6f4] text-[11px] tracking-[0.1em] uppercase
-                     transition-colors hover:bg-[#a80000]"
-          style={{ fontFamily: "var(--font-montserrat)", fontWeight: 800 }}
-        >
-          Запросить консультацию
-        </a>
+        <div className="flex items-center gap-3">
+          {/* Выделенная ссылка на лендинг для туризма */}
+          <Link
+            href="/tourism"
+            data-goal="nav_click"
+            data-goal-label="Туризм из Китая"
+            className="inline-flex h-9 items-center gap-2 border border-[#c00000] px-4
+                       text-[11px] uppercase tracking-[0.1em] text-[#c00000]
+                       transition-colors hover:bg-[#c00000] hover:text-white"
+            style={{ fontFamily: "var(--font-montserrat)", fontWeight: 800 }}
+          >
+            <span className="relative flex h-2 w-2" aria-hidden>
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-current opacity-60 motion-reduce:animate-none" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-current" />
+            </span>
+            Туризм из Китая
+          </Link>
+
+          {/* CTA */}
+          <a
+            href="#contact"
+            data-goal="cta_header"
+            className="hidden sm:inline-flex items-center justify-center h-9 px-6
+                       bg-[#c00000] text-[#fff6f4] text-[11px] tracking-[0.1em] uppercase
+                       transition-colors hover:bg-[#a80000]"
+            style={{ fontFamily: "var(--font-montserrat)", fontWeight: 800 }}
+          >
+            Запросить консультацию
+          </a>
+        </div>
 
       </div>
     </header>
