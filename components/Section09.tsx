@@ -269,6 +269,7 @@ export default function Section09({
             <div className="mt-[40px] flex flex-wrap items-center gap-[24px]">
               <button
                 type="submit"
+                data-goal="form_submit_click"
                 disabled={loading || success}
                 className="bg-[#c00000] px-[64px] py-[20px] text-[13px] tracking-[0.2em] uppercase text-white transition-colors hover:bg-[#a00000] disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ fontFamily: "var(--font-montserrat)", fontWeight: 800 }}

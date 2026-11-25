@@ -57,6 +57,7 @@ export default function Hero() {
               <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-6">
                 <a
                   href="#contact"
+                  data-goal="cta_hero"
                   className="inline-flex items-center justify-center bg-[#c00000] text-[#fff6f4]
                              text-[11px] tracking-[0.14em] uppercase transition-colors hover:bg-[#a80000]
                              w-full sm:w-[284px] h-[75px] shrink-0"

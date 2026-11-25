@@ -32,6 +32,8 @@ export default function Header() {
             <a
               key={link.href}
               href={link.href}
+              data-goal="nav_click"
+              data-goal-label={link.label}
               className="text-[12px] tracking-[0.04em] text-[#5c605d] transition-colors hover:text-[#2f3331]"
             >
               {link.label}
@@ -42,6 +44,7 @@ export default function Header() {
         {/* CTA */}
         <a
           href="#contact"
+          data-goal="cta_header"
           className="hidden sm:inline-flex items-center justify-center h-9 px-6
                      bg-[#c00000] text-[#fff6f4] text-[11px] tracking-[0.1em] uppercase
                      transition-colors hover:bg-[#a80000]"

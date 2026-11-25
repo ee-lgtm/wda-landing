@@ -29,9 +29,27 @@ function PageHits({ id }: { id: number }) {
   return null;
 }
 
+// Клики по элементам с data-goal="..." отправляются как цели.
+// Дополнительно можно передать data-goal-label — уйдёт в параметры визита.
+function GoalClicks({ id }: { id: number }) {
+  useEffect(() => {
+    function onClick(e: MouseEvent) {
+      const el = (e.target as Element | null)?.closest<HTMLElement>("[data-goal]");
+      if (!el?.dataset.goal) return;
+      const label = el.dataset.goalLabel;
+      window.ym?.(id, "reachGoal", el.dataset.goal, label ? { label } : undefined);
+    }
+    document.addEventListener("click", onClick, { capture: true });
+    return () => document.removeEventListener("click", onClick, { capture: true });
+  }, [id]);
+
+  return null;
+}
+
 export default function YandexMetrika({ id }: { id: number }) {
   return (
     <>
+      <GoalClicks id={id} />
       <Script id="yandex-metrika" strategy="afterInteractive">
         {`
           (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
