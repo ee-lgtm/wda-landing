@@ -1,6 +1,5 @@
 "use client";
 
-import Script from "next/script";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef } from "react";
 
@@ -10,20 +9,22 @@ declare global {
   }
 }
 
+// Сам код счётчика (init) рендерится сервером в <head> — см. metrikaSnippet()
+// в lib/metrika.ts. Здесь только то, что требует клиента.
+
 // Отправляет хит при клиентской навигации (App Router не перезагружает страницу).
 function PageHits({ id }: { id: number }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const isFirst = useRef(true);
+  const prevUrl = useRef<string | null>(null);
 
   useEffect(() => {
-    // Первый хит отправляет сам init
-    if (isFirst.current) {
-      isFirst.current = false;
-      return;
+    const url = window.location.href;
+    // Первый хит отправляет init из <head>
+    if (prevUrl.current !== null && prevUrl.current !== url) {
+      window.ym?.(id, "hit", url, { referer: prevUrl.current });
     }
-    const qs = searchParams.toString();
-    window.ym?.(id, "hit", pathname + (qs ? `?${qs}` : ""));
+    prevUrl.current = url;
   }, [id, pathname, searchParams]);
 
   return null;
@@ -50,26 +51,6 @@ export default function YandexMetrika({ id }: { id: number }) {
   return (
     <>
       <GoalClicks id={id} />
-      <Script id="yandex-metrika" strategy="afterInteractive">
-        {`
-          (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-          m[i].l=1*new Date();
-          for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-          k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-          (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=${id}", "ym");
-
-          ym(${id}, "init", {
-            ssr: true,
-            webvisor: true,
-            clickmap: true,
-            ecommerce: "dataLayer",
-            referrer: document.referrer,
-            url: location.href,
-            accurateTrackBounce: true,
-            trackLinks: true
-          });
-        `}
-      </Script>
       <noscript>
         <div>
           {/* eslint-disable-next-line @next/next/no-img-element */}

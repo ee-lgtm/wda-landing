@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Montserrat, Manrope } from "next/font/google";
 import YandexMetrika from "@/components/YandexMetrika";
-import { YM_ID } from "@/lib/metrika";
+import { YM_ID, metrikaSnippet } from "@/lib/metrika";
 import "./globals.css";
 
 const geist = Geist({
@@ -36,8 +36,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
+      <head>
+        {/* Yandex.Metrika counter */}
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{ __html: metrikaSnippet(YM_ID) }}
+        />
+      </head>
       <body className={`${geist.variable} ${montserrat.variable} ${manrope.variable} font-sans antialiased`}>{children}
-        {YM_ID && <YandexMetrika id={YM_ID} />}
+        <YandexMetrika id={YM_ID} />
       </body>
     </html>
   );
