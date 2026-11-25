@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const { company, name, position, contact, message, consent } = await req.json();
+  const { company, name, position, contact, message, consent, source, plan } =
+    await req.json();
 
   if (consent !== true) {
     return NextResponse.json(
@@ -22,6 +23,9 @@ export async function POST(req: NextRequest) {
 
   const text = [
     "Новая заявка:",
+    "",
+    `Страница: ${source || "Главная"}`,
+    ...(plan ? [`Тариф: ${plan}`] : []),
     "",
     `Компания: ${company || "—"}`,
     `Имя: ${name || "—"}`,

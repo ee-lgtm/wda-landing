@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { reachGoal } from "@/lib/metrika";
 
 // ─── Section 09: Запросить консультацию ───────────────────────────────────────
@@ -14,6 +14,10 @@ interface Section09Props {
   sectionIndexLabel?: string;  // "09"
   sectionHanzi?: string;       // "联"
   decorativeHanzi?: string;    // "联"
+  title?: string;
+  subtitle?: string;
+  /** Откуда пришла заявка — попадает в сообщение в Telegram */
+  source?: string;
 }
 
 // ─── Section label ────────────────────────────────────────────────────────────
@@ -79,10 +83,27 @@ export default function Section09({
   sectionIndexLabel = "09",
   sectionHanzi = "联",
   decorativeHanzi = "联",
+  title = "Запросить консультацию",
+  subtitle = "Если вы рассматриваете Китай или Центральную Азию как направление роста, свяжитесь с нами для предварительного обсуждения проекта.",
+  source = "Главная",
 }: Section09Props) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Выбранный тариф: ссылки с data-plan="..." на странице проставляют его в форму
+  const [plan, setPlan] = useState<string | null>(null);
+
+  useEffect(() => {
+    function onClick(e: MouseEvent) {
+      const el = (e.target as Element | null)?.closest<HTMLElement>("[data-plan]");
+      if (el?.dataset.plan) {
+        setPlan(el.dataset.plan);
+        setSuccess(false);
+      }
+    }
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -99,6 +120,8 @@ export default function Section09({
 
     const data = {
       consent,
+      source,
+      plan,
       company: (form.elements.namedItem("company") as HTMLInputElement).value,
       name: (form.elements.namedItem("name") as HTMLInputElement).value,
       position: (form.elements.namedItem("position") as HTMLInputElement).value,
@@ -115,7 +138,7 @@ export default function Section09({
 
       if (!res.ok) throw new Error("server");
       setSuccess(true);
-      reachGoal("lead_form");
+      reachGoal("lead_form", { source, plan });
       form.reset();
     } catch {
       setError("Не удалось отправить заявку. Попробуйте позже.");
@@ -159,14 +182,30 @@ export default function Section09({
             className="mb-[16px] text-[28px] leading-[1.1] tracking-[-0.025em] text-[#2f3331] lg:text-[36px]"
             style={{ fontFamily: "var(--font-manrope)", fontWeight: 700 }}
           >
-            Запросить консультацию
+            {title}
           </h2>
 
           {/* Subtitle */}
           <p className="mb-[48px] text-[16px] leading-[1.65] text-[#5c605d]">
-            Если вы рассматриваете Китай или Центральную Азию как направление
-            роста, свяжитесь с нами для предварительного обсуждения проекта.
+            {subtitle}
           </p>
+
+          {/* Выбранный тариф */}
+          {plan && (
+            <div className="-mt-[24px] mb-[40px] inline-flex items-center gap-3 border border-[#c00000] px-4 py-2 text-[13px] text-[#2f3331]">
+              <span>
+                Интересует: <strong>{plan}</strong>
+              </span>
+              <button
+                type="button"
+                onClick={() => setPlan(null)}
+                aria-label="Убрать выбранный тариф"
+                className="text-[16px] leading-none text-[#5c605d] hover:text-[#c00000]"
+              >
+                ×
+              </button>
+            </div>
+          )}
 
           {/* ── Form ────────────────────────────────────────────────────────── */}
           <form onSubmit={handleSubmit}>

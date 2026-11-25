@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import SiteFooter from "@/components/SiteFooter";
+import Section09 from "@/components/Section09";
 
 // ─── Лендинг: привлечение туристов из Китая ───────────────────────────────────
 
@@ -111,6 +112,7 @@ const plans = [
       "Базовая аналитика и рекомендации",
     ],
     cta: "Обсудить ведение",
+    toForm: true,
     featured: true,
   },
   {
@@ -127,6 +129,7 @@ const plans = [
       "Организация блог-туров под ключ",
     ],
     cta: "Получить предложение",
+    toForm: true,
   },
 ];
 
@@ -483,13 +486,26 @@ export default function TourismPage() {
                       </li>
                     ))}
                   </ul>
-                  <TgButton
-                    goal={`plan: ${p.title}`}
-                    variant={p.featured ? "red" : "dark"}
-                    className="mt-auto w-full"
-                  >
-                    {p.cta}
-                  </TgButton>
+                  {p.toForm ? (
+                    <a
+                      href="#contact"
+                      data-plan={p.title}
+                      data-goal="tourism_form_click"
+                      data-goal-label={p.title}
+                      className={`mt-auto inline-flex min-h-[56px] w-full items-center justify-center px-8 py-4 text-center text-[11px] uppercase tracking-[0.14em] text-white transition-colors ${p.featured ? "bg-[#c00000] hover:bg-[#a00000]" : "bg-[#2f3331] hover:bg-black"}`}
+                      style={montserrat}
+                    >
+                      {p.cta}
+                    </a>
+                  ) : (
+                    <TgButton
+                      goal={`plan: ${p.title}`}
+                      variant={p.featured ? "red" : "dark"}
+                      className="mt-auto w-full"
+                    >
+                      {p.cta}
+                    </TgButton>
+                  )}
                 </article>
               ))}
             </div>
@@ -610,6 +626,16 @@ export default function TourismPage() {
             </div>
           </div>
         </section>
+
+        {/* ── 06 Заявка ───────────────────────────────────────────────────── */}
+        <Section09
+          sectionIndexLabel="06"
+          sectionHanzi="联"
+          decorativeHanzi="联"
+          title="Обсудить ведение или продвижение"
+          subtitle="Расскажите об объекте и задаче — мы свяжемся с вами, чтобы обсудить формат работы и стоимость."
+          source="Туризм (/tourism)"
+        />
 
         {/* ── Финальный CTA ───────────────────────────────────────────────── */}
         <section className="relative overflow-hidden bg-[#2f3331] text-white">
