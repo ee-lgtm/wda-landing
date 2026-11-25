@@ -66,7 +66,7 @@ function Field({
         type="text"
         autoComplete={autoComplete}
         placeholder={placeholder}
-        className="w-full border-b border-[rgba(175,179,176,0.3)] bg-transparent pb-[14px] pt-[13px] text-[16px] leading-normal text-[#2f3331] outline-none transition-colors placeholder:text-[rgba(175,179,176,0.5)] focus:border-[#c00000]"
+        className="ym-disable-keys w-full border-b border-[rgba(175,179,176,0.3)] bg-transparent pb-[14px] pt-[13px] text-[16px] leading-normal text-[#2f3331] outline-none transition-colors placeholder:text-[rgba(175,179,176,0.5)] focus:border-[#c00000]"
       />
     </div>
   );
@@ -209,7 +209,7 @@ export default function Section09({
                 id="request"
                 rows={5}
                 placeholder="Опишите задачу, регион, сроки и любые важные детали"
-                className="w-full resize-none border-b border-[rgba(175,179,176,0.3)] bg-transparent pb-[12px] pt-[12px] text-[16px] leading-[1.65] text-[#2f3331] outline-none transition-colors placeholder:text-[rgba(175,179,176,0.5)] focus:border-[#c00000]"
+                className="ym-disable-keys w-full resize-none border-b border-[rgba(175,179,176,0.3)] bg-transparent pb-[12px] pt-[12px] text-[16px] leading-[1.65] text-[#2f3331] outline-none transition-colors placeholder:text-[rgba(175,179,176,0.5)] focus:border-[#c00000]"
               />
             </div>
 
